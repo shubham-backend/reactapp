@@ -3,11 +3,23 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import axios from "axios"
+
+axios.interceptors.request.use((request)=>{
+  console.log("......" , request.url)
+    if(request.url.includes("upload") || request.url.includes("cart") ){
+      if(localStorage.token){
+      request.headers["authtoken"] = localStorage.token
+      } 
+    } 
+   return request
+  }, (error)=>{
+  return Promise.reject(error)
+  }) 
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <App />,
   document.getElementById('root')
 );
 
