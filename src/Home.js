@@ -1,12 +1,13 @@
 import { Carousel } from "./Carousel";
-import CakeList from "./CakeList";
+import  HomeNavbar  from "./HomeNavbar";
 
 function Home(props)
 {
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.",props);
     return (
         <div>
+            <HomeNavbar> Hi Shubham Gupta</HomeNavbar>
             <Carousel />
-            <CakeList />
         </div>
     )
 }

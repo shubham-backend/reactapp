@@ -8,7 +8,6 @@ function Login(props){
 var loginPost = function(){
     console.log("User has entered ", user);
     var apiUrl ="https://apifromashu.herokuapp.com/api/login";
-    //var apiUrl = process.env.REACT_BASE_API_URL+'login';
     axios({
         url:apiUrl,
         method:'post',
@@ -16,8 +15,11 @@ var loginPost = function(){
     }).then((response) => {
         console.log("Login Info", response)
         if(response.data.token){
-            localStorage.token = response.data.token
-            props.history.push("/")
+            //localStorage.token = response.data.token
+            //props.history.push("/")
+            props.loggedin(true)
+        } else {
+            alert("Invalid Credentials")
         }
     }, (error)=>{
         console.log("Error - Login API", error)
@@ -25,7 +27,7 @@ var loginPost = function(){
 }
 
 useEffect(()=>{
-    alert('here');
+    //Code
 },[errorMessage])
 
 

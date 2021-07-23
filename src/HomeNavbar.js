@@ -2,7 +2,8 @@ import { useState } from "react"
 import {Link} from "react-router-dom"
 import {withRouter} from "react-router-dom"
 
-function Navbar(props) {
+function HomeNavbar(props) {
+    console.log(props);
   //alert('Rendering navbar')
   let [searchtext,setSearchText] = useState()
   //let searchtext
@@ -24,35 +25,18 @@ function Navbar(props) {
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav mr-auto">
         <div className="form-inline my-2 my-lg-0">
-          
-          {/* Method 1 but it's directly defined and get value */}
-          {/* <input id="searchinput" className="form-control mr-sm-2" type="search" placeholder="Search your favourite cake..." aria-label="Search"></input>
-          <button onClick={()=>{props.fun(document.getElementById('searchinput').value)}} className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> */}
-          
-          {/* Method 2 but it's decalare first of line, defined and get value */}
           <input onChange={handleSearchtext} className="form-control mr-sm-2" type="search" placeholder="Search your favourite cake..." aria-label="Search"></input>
-          <button onClick={search} className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          <button onClick={search} className="btn btn-success my-2 my-sm-0" type="submit">Search</button>
         </div>
       </ul>
       <div className="form-inline my-2 my-lg-0">
-
-      {props.isUserLoggedIn == false && 
-      <div>
-      <Link to="/login" className="btn btn-primary my-2 my-sm-0" type="submit">Login</Link>
-      <Link to="/signup" className="btn btn-primary my-2 my-sm-0" type="submit">Signup</Link>
-      </div>}
-      {props.isUserLoggedIn == true && 
-      <div>
-      <button className="btn btn-danger my-2 my-sm-0" type="submit">Logout</button>
-      <button className="btn btn-primary my-2 my-sm-0" type="submit">Cart</button>
-      </div>}
-      {/* <Link to="/add-cake" className="btn btn-primary my-2 my-sm-0" type="submit">Add Cake</Link>  } */}
-
-
+          <p></p>
+        <button className="btn btn-danger my-2 my-sm-0" type="submit">Logout</button>
+        <button className="btn btn-primary my-2 my-sm-0" type="submit">Cart</button>
       </div>
     </div>
   </nav>
   )
 }   
 
-export default withRouter(Navbar)
+export default withRouter(HomeNavbar)

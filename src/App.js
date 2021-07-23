@@ -42,14 +42,24 @@ export default function App() {
     setSearchtext(searchString)
   }
 
+  var [isUserLoggedIn, setUserLogin] = useState(false)
+  function loggedin()
+  {
+    setUserLogin(true)
+  }
+
   return (
     <div>
       <Router>
-      <Navbar fun= {function1}>Shubham Gupta</Navbar>
+      {/* <Navbar fun= {function1}>Shubham Gupta</Navbar> */}
+      <Navbar isUserLoggedIn={isUserLoggedIn}>Shubham Gupta</Navbar>
+
       {/* <Search searchquery={searchtext}/> */}
       <Switch>
+      <Route path = "/navbar" exact component={Navbar} />
       <Route path = "/" exact component={Home} />
-      <Route path = "/login" exact component={Login} /> 
+      {/* <Route path = "/login" exact component={Login} />  */}
+      <Route exact path ="/login"> <Login loggedin={loggedin}/></Route>
       <Route path = "/signup" exact component={Register } /> 
       <Route path = "/search" exact component={Search} /> 
       <Route path = "/add-cake" exact component={AddCake} /> 
