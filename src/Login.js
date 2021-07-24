@@ -15,9 +15,9 @@ var loginPost = function(){
     }).then((response) => {
         console.log("Login Info", response)
         if(response.data.token){
-            //localStorage.token = response.data.token
-            //props.history.push("/")
-            props.loggedin(true)
+            this.props.loggedin(true)
+            localStorage.token = response.data.token
+            this.props.history.push("/")
         } else {
             alert("Invalid Credentials")
         }

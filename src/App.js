@@ -42,7 +42,7 @@ export default function App() {
     setSearchtext(searchString)
   }
 
-  var [isUserLoggedIn, setUserLogin] = useState(false)
+  var [isUserLoggedIn, setUserLogin] = useState(localStorage.token ? true : false)
   function loggedin()
   {
     setUserLogin(true)
