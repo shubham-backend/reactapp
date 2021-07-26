@@ -9,46 +9,44 @@ function Search(props)
     console.log("Query is "+query.q);
     let cakeStyle = {width: "16.1em"};
     let [cakes,setCakes] = useState([]);
+
     useEffect(()=>{
-        console.log("Query Changed" + query.q);
-        console.log("env"+process.env.REACT_APP_BASE_API_URL);
-        let apiUrl = "https://apifromashu.herokuapp.com/api/searchcakes?q="+query.q
+        console.log("Query Changed - " + query.q);
+        let apiUrl = process.env.REACT_APP_BASE_API_URL+"/searchcakes?q="+query.q
+        console.log(apiUrl);
+       
         axios({
             url: apiUrl,
             method: 'get'
         }).then((response)=>{
             console.log("success", response.data.data);
             setCakes(response.data.data);
-            console.log("Matches Cake List",cakes);
         },(error)=>{
             console.log("error", error);
         })
     },[query.q])
 
-    console.log("here1",cakes);
+    console.log("Total Filtered Cakes - ",cakes);
     return (
-    
-            <div className="row">
-                Search Page : Search for these Cake -- {query.q}
-                {cakes.map((each,index)=>{
-                    console.log(each.name);
-                    console.log(each.image);
-                    console.log(each.price);
-                    console.log(each.cakeid);
-
-
+        <div className="row cake">
+            {/* Search Page : Search for these Cake -- {query.q} */}
+            {cakes && cakes.length ? cakes.map((each,index)=>{
+                return(
                 <div className="card" style={cakeStyle}>
                     <Link to={"/cake/"+each.cakeid}><img src={each.image} className="card-img-top" alt="..." /></Link>
                     <div className="card-body">
                         <h5 className="card-title">{each.name}</h5>
                         <p className="card-text">₹{each.price}</p>
-                        {each.discount && <p>Discount: {each.discount}</p>}
                     </div>
                 </div>
-                })}
-            </div>
-        
+                )
+            }) : 
+            <div className="alert alert-success nodatafound" role="alert">
+                <h4 className="alert-heading">Oops !!</h4>
+                <hr></hr>
+                <p className="mb-0">No data found.</p>
+            </div>}
+        </div>
     )
 }
-
 export default Search

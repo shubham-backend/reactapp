@@ -16,7 +16,7 @@ function Navbar(props) {
   }
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-    <a className="navbar-brand" href="#">{props.children} Cake House</a>
+    <Link to="/"><a className="navbar-brand">{props.children} Cake House</a></Link>
     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
@@ -31,15 +31,15 @@ function Navbar(props) {
           
           {/* Method 2 but it's decalare first of line, defined and get value */}
           <input onChange={handleSearchtext} className="form-control mr-sm-2" type="search" placeholder="Search your favourite cake..." aria-label="Search"></input>
-          <button onClick={search} className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          <button onClick={search} className="btn btn-success my-2 my-sm-0" type="submit">Search</button>
         </div>
       </ul>
       <div className="form-inline my-2 my-lg-0">
 
       {props.isUserLoggedIn == false && 
-      <div>
-      <Link to="/login" className="btn btn-primary my-2 my-sm-0" type="submit">Login</Link>
-      <Link to="/signup" className="btn btn-primary my-2 my-sm-0" type="submit">Signup</Link>
+      <div className="btn-spc">
+      <Link to="/login"><button className="submit my-2 my-sm-0" type="submit">Login</button></Link>
+      {/* <Link to="/signup" className="btn btn-primary my-2 my-sm-0" type="submit">Signup</Link> */}
       </div>}
       {props.isUserLoggedIn == true && 
       <div>

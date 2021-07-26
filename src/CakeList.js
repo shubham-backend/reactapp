@@ -1,7 +1,6 @@
 import {Component} from "react"
 import {Link} from "react-router-dom"
 import axios from "axios"
-
 class CakeList extends Component{
 	constructor(props){
 		super(props)
@@ -23,18 +22,19 @@ class CakeList extends Component{
 			})
 			
 		},5000)
+		
 		this.state.stl = {
 			display: "flex",
 			"margin-right": "0px",
-			"margin-left": "85px",
-			"margin-top": "20px",
-	}
+			"margin-left": "137px",
+			"margin-top": "0px",
+		}
 	}
 	
 	render(){
 		return 	(
 			<div className="row" style={this.state.stl}>
-			{!this.state.isCakeloaded && <loader> ....... loading appears here</loader>}
+			{!this.state.isCakeloaded && <loader> Loading appears here....</loader>}
 			{this.state.isCakeloaded && this.state.cakes.map((cake,index) =>(
 				<div className="card" style={{width:"18em"}}>
 				  	<Link to={"/cake/"+cake.cakeid}><img className="card-img-top" src={cake.image} alt="Card image cap"/></Link>

@@ -12,6 +12,7 @@ import FileUpload from "./FilesUploadComponent";
 import Loader from "react-loader-spinner";
 //import CakeList from "./CakeList";
 import Cakedetails from "./Cakedetails";
+import ForgotPassword from "./ForgotPassword";
 import {BrowserRouter as Router, Route, Redirect, Switch, Link} from "react-router-dom"
 import { useState } from "react";
 let trainee = ["Shubham", "Kumar", "Gupta"]
@@ -38,7 +39,7 @@ export default function App() {
 
   let [searchtext, setSearchtext] = useState()
   let function1 = function(searchString){
-    alert("Son told the answer - " + searchString)
+    //alert("Son told the answer - " + searchString)
     setSearchtext(searchString)
   }
 
@@ -52,7 +53,7 @@ export default function App() {
     <div>
       <Router>
       {/* <Navbar fun= {function1}>Shubham Gupta</Navbar> */}
-      <Navbar isUserLoggedIn={isUserLoggedIn}>Shubham Gupta</Navbar>
+      <Navbar isUserLoggedIn={isUserLoggedIn} fun= {function1}>Shubham Gupta</Navbar>
 
       {/* <Search searchquery={searchtext}/> */}
       <Switch>
@@ -61,6 +62,7 @@ export default function App() {
       {/* <Route path = "/login" exact component={Login} />  */}
       <Route exact path ="/login"> <Login loggedin={loggedin}/></Route>
       <Route path = "/signup" exact component={Register } /> 
+      <Route path = "/forgot-password" exact component={ForgotPassword } /> 
       <Route path = "/search" exact component={Search} /> 
       <Route path = "/add-cake" exact component={AddCake} /> 
       <Route path = "/cake/:cakeid" exact component={Cakedetails} /> 

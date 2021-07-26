@@ -35,13 +35,16 @@ export default function Register()
 
     return (
         <div>
-            <h1>Register Page</h1>
-            <input onChange={handleName} className="form-control" type="name" placeholder="Enter Name "></input>
-            <input onChange={handleEmail} className="form-control" type="email" placeholder="Enter Email"></input>
-            <input onChange={handlePassword} className="form-control" type="password" placeholder="Enter Password"></input>
-            <button className="btn btn-primary"  onClick={registerPost} id="register">Register</button>
-            . {true && <Link to="/login" className="btn btn-primary my-2 my-sm-0" type="submit">Login</Link>}
-
+            <div className="main">
+                <p className="sign" align="center">Sign Up</p>
+                <div className="form1">
+                    <input onChange={handleName} className="un" type="name" placeholder="Enter Name "></input>
+                    <input onChange={handleEmail} className="un" type="email" placeholder="Enter Email"></input>
+                    <input onChange={handlePassword} className="pass" type="password" placeholder="Enter Password"></input>
+                    <button className="btn btn-primary submit"  onClick={registerPost} id="register">Register</button>
+                    <p className="forgot" align="center"><Link to="/login">Back to Login</Link></p>   
+                </div>   
+            </div>
         </div>
     )
 }

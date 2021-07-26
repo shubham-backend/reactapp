@@ -1,3 +1,4 @@
+import CakeList from "./CakeList";
 import { Carousel } from "./Carousel";
 import  HomeNavbar  from "./HomeNavbar";
 
@@ -8,6 +9,7 @@ function Home(props)
         <div>
             {/* <HomeNavbar> Hi Shubham Gupta</HomeNavbar> */}
             <Carousel />
+            <CakeList />
         </div>
     )
 }
