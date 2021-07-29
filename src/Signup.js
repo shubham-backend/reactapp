@@ -1,9 +1,6 @@
 import {Component} from "react"
 //import React from "react"
 
-var a=()=>{
-
-}
 //class Signup extends React.Component {
 class Signup extends Component {
 

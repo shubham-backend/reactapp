@@ -1,23 +1,36 @@
 import { useEffect, useState } from "react"
 import axios from 'axios';
 import {Link} from "react-router-dom"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ForgotPassword(props){
+
+    toast.configure() 
+    const notify = (message) => toast(message);
+
     let user ={}
     var [errorMessage, setErrorMessage] = useState()
-
-var forgotPost = function(){
+    let msg = "";
+    
+    var forgotPost = function(){
     var apiUrl =process.env.REACT_APP_BASE_API_URL+"/recoverpassword";
     axios({
         url:apiUrl,
         method:'post',
         data:user
     }).then((response) => {
-        console.log("Login Info", response)
+        console.log("Forgot Password Info", response)
         if(response.data){
-            //this.props.loggedin(true)
+            if(response.data.errorMessage){
+                msg="Please Enter your registered email."
+                notify(msg)
+            } else if(response.data.message) {
+                notify(response.data.message)
+            } 
         } else {
-            alert("Invalid Credentials")
+            msg = "Invalid Credentials";
+            notify(msg)
         }
     }, (error)=>{
         console.log("Error - Forgot Password API", error)

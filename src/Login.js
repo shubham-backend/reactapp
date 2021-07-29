@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
 import axios from 'axios';
-import {Link} from "react-router-dom"
+import {Link, withRouter} from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {Component} from "react"
+import { connect } from "react-redux"
 
 function Login(props){
     toast.configure() 
@@ -22,12 +24,16 @@ var loginPost = function(){
     }).then((response) => {
         console.log("Login Info", response)
         if(response.data.token){
-            this.props.loggedin(true)
+            //props.loggedin(true)
+            props.dispatch({
+                type:"LOGIN",
+                payload:response.data
+            })
             localStorage.token = response.data.token
             //toast("Login Successfully!!");
             msg="Success !! Login Successfully!!";
             notify(msg)
-            this.props.history.push("/")
+            props.history.push("/")
         } else {
             msg="Oops !! Invalid Credentials.!!";
             <ToastContainer  />
@@ -35,6 +41,8 @@ var loginPost = function(){
             //alert("Invalid Credentials")
         }
     }, (error)=>{
+        <ToastContainer  />
+        notify("Oops !! Please enter Email or Password.")
         console.log("Error - Login API", error)
     })
 }
@@ -66,4 +74,6 @@ return (
         </div>
     )
 }
-export default Login
+//Withrouter is adding props to login component
+Login = withRouter(Login)
+export default connect()(Login)
