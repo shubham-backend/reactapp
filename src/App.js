@@ -9,13 +9,14 @@ import Register from "./Register";
 import Search from "./Search";
 import AddCake from "./AddCake";
 import FileUpload from "./FilesUploadComponent";
-import Loader from "react-loader-spinner";
 //import CakeList from "./CakeList";
 import Cakedetails from "./Cakedetails";
 import ForgotPassword from "./ForgotPassword";
 import {BrowserRouter as Router, Route, Redirect, Switch, Link} from "react-router-dom"
 import { useState } from "react";
+import Loader from "react-loader-spinner";
 let trainee = ["Shubham", "Kumar", "Gupta"]
+
 
 export default function App() {
   
@@ -49,8 +50,19 @@ export default function App() {
     setUserLogin(true)
   }
 
+  const [spinnerLoading, setSpinnerLoading] = useState(true);
+
   return (
-    <div>
+    <div style={{ textAlign: "center" }}>
+      {/* <Loader
+        type="Circles"
+        color="#00BFFF"
+        height={100}
+        width={100}
+        timeout={3000} //3 secs
+        visible={spinnerLoading}
+      /> */}
+      {/* onClick={() => setSpinnerLoading(!spinnerLoading)} */}
       <Router>
       {/* <Navbar fun= {function1}>Shubham Gupta</Navbar> */}
       <Navbar isUserLoggedIn={isUserLoggedIn} fun= {function1}>Shubham Gupta</Navbar>

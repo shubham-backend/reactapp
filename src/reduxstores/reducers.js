@@ -31,15 +31,15 @@ export var AuthReducer = function(state ={
     }
 }
 
-export var CakeList = function(state ={
-    isUserLoggedIn : localStorage.token?true:false
+export var CakeListReducer = function(state ={
+    cakes : localStorage.cakes?true:false
 }, action) {
     switch(action.type){
         case "CAKELIST" : {
             state={...state}
-            state["isUserLoggedIn"] = true
-            state["user"] = action.payload
-            console.log("User", state);
+            console.log("Action -", action);
+            state["cakes"] = JSON.parse(JSON.stringify(action.payload));
+            console.log("cake list -", state["cakes"]);
             return state
         }
         default : return state

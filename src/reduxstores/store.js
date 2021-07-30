@@ -2,10 +2,9 @@ import {combineReducers, createStore} from "redux"
 //import { Redcuers1 } from "./reducers"
 //var store = createStore(Redcuers1)
 
-import { Shubham, Gupta, AuthReducer } from "./reducers"
-var reducers = combineReducers({Shubham,Gupta, AuthReducer})
+import { Shubham, Gupta, AuthReducer, CakeListReducer } from "./reducers"
+var reducers = combineReducers({Shubham,Gupta, AuthReducer, CakeListReducer})
 var store = createStore(reducers)
-
 export default store
 console.log("Store", store.getState());
 

@@ -56,6 +56,7 @@ function Navbar(props) {
       <div className="btn-spc">
       <input onChange={handleSearchtext} className="form-control mr-sm-2" type="search" placeholder="Search your favourite cake..." aria-label="Search"></input>
       <button onClick={search} className="btn btn-success search" type="submit">Search</button>
+      <Link to="/signup"><button className="submit my-2 my-sm-0" type="submit">Signup</button></Link>
       <Link to="/login"><button className="submit my-2 my-sm-0" type="submit">Login</button></Link>
       {/* <Link to="/signup" className="btn btn-primary my-2 my-sm-0" type="submit">Signup</Link> */}
       </div>}

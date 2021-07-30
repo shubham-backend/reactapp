@@ -1,6 +1,10 @@
 import {Component} from "react"
-import {Link} from "react-router-dom"
+import {Link, withRouter} from "react-router-dom"
 import axios from "axios"
+import { connect } from "react-redux"
+import React from 'react';
+import Loader from "react-loader-spinner";
+
 class CakeList extends Component{
 	constructor(props){
 		super(props)
@@ -16,6 +20,11 @@ class CakeList extends Component{
 				this.setState({
 					cakes : response.data.data,
 					isCakeloaded: true
+				})
+				localStorage.setItem('cakes',JSON.stringify(response.data.data))
+				this.props.dispatch({
+					type:"CAKELIST",
+					payload:response.data
 				})
 			},(error)=>{
 				console.log("error", error);
@@ -33,8 +42,19 @@ class CakeList extends Component{
 	
 	render(){
 		return 	(
+			<div style={{ textAlign: "center" }} >
+			{!this.state.isCakeloaded && 
+			// <loader> Loading appears here....</loader>
+			<Loader
+				type="Circles"
+				color="#00BFFF"
+				height={100}
+				width={100}
+				timeout={3000} //3 secs
+			/>
+			}
+
 			<div className="row" style={this.state.stl}>
-			{!this.state.isCakeloaded && <loader> Loading appears here....</loader>}
 			{this.state.isCakeloaded && this.state.cakes.map((cake,index) =>(
 				<div className="card" style={{width:"18em"}}>
 				  	<Link to={"/cake/"+cake.cakeid}><img className="card-img-top" src={cake.image} alt="Card image cap"/></Link>
@@ -46,9 +66,17 @@ class CakeList extends Component{
 				</div>
 			))}
 			</div>
+			</div>
 		)
 	}
 
 }
 
-export default CakeList
+CakeList = withRouter(CakeList)
+export default connect(function(state,props){
+	console.log(props);
+	console.log("props", state["CakeListReducer"]["cakes"]);
+  return {
+    cakes: state["CakeListReducer"]["cakes"] 
+  }
+})(CakeList)

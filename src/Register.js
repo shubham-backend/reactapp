@@ -39,9 +39,15 @@ export default function Register()
     var handlePassword = function(e){
         userInfo.password = e.target.value
     }
-
+    var divImage = {
+        //backgroundImage: "url(" + "https://images.pexels.com/photos/34153/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350" + ")",
+        backgroundImage: "cake-background.jpg"
+    };
+    let bgImage = "cake-background.jpg"
     return (
-        <div>
+        <div style={{
+            backgroundImage: 'url("cake-background.jpg")',
+            height: "300px",     "background-size": "cover", backgroundRepeat: "no-repeat"}}>
             <div className="main">
                 <p className="sign" align="center">Sign Up</p>
                 <div className="form1">

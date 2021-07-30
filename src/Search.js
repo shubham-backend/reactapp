@@ -2,6 +2,7 @@ import queryString from "query-string"
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import {Link} from "react-router-dom"
+import Loader from "react-loader-spinner";
 
 function Search(props)
 {
@@ -9,6 +10,7 @@ function Search(props)
     console.log("Query is "+query.q);
     let cakeStyle = {width: "16.1em"};
     let [cakes,setCakes] = useState([]);
+    let [loading,setLoading] = useState(true)
 
     useEffect(()=>{
         console.log("Query Changed - " + query.q);
@@ -19,7 +21,8 @@ function Search(props)
             url: apiUrl,
             method: 'get'
         }).then((response)=>{
-            console.log("success", response.data.data);
+            console.log("success", response.data.data)
+            setLoading(false);
             setCakes(response.data.data);
         },(error)=>{
             console.log("error", error);
@@ -28,9 +31,20 @@ function Search(props)
 
     console.log("Total Filtered Cakes - ",cakes);
     return (
+        <div>
+            {loading && 
+			// <loader> Loading appears here....</loader>
+			<Loader
+				type="Circles"
+				color="#00BFFF"
+				height={100}
+				width={100}
+				timeout={3000} //3 secs
+			/>
+			}
         <div className="row cake">
             {/* Search Page : Search for these Cake -- {query.q} */}
-            {cakes && cakes.length ? cakes.map((each,index)=>{
+            {cakes && cakes.length > 0 && cakes.map((each,index)=>{
                 return(
                 <div className="card" style={cakeStyle}>
                     <Link to={"/cake/"+each.cakeid}><img src={each.image} className="card-img-top" alt="..." /></Link>
@@ -40,12 +54,16 @@ function Search(props)
                     </div>
                 </div>
                 )
-            }) : 
+            }) }
+            {console.log(">>>>>>>>>>>>>",cakes.length)}
             <div className="alert alert-success nodatafound" role="alert">
                 <h4 className="alert-heading">Oops !!</h4>
                 <hr></hr>
-                <p className="mb-0">No data found.</p>
-            </div>}
+                {cakes.length == 0 &&
+                <p className="mb-0">No data found.</p>}
+            </div>
+        
+        </div>
         </div>
     )
 }
