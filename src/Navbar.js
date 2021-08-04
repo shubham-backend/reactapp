@@ -67,7 +67,7 @@ function Navbar(props) {
       Welcome {props.name}
       </li>}
       <button onClick={logout} className="btn btn-danger my-2 my-sm-0" type="submit">Logout</button>
-      <button className="btn btn-primary my-2 my-sm-0" type="submit">Cart</button>
+      <Link to="/cart-details"><button className="btn btn-primary my-2 my-sm-0" type="submit">Cart</button></Link>
       </div>}
       {/* <Link to="/add-cake" className="btn btn-primary my-2 my-sm-0" type="submit">Add Cake</Link>  } */}
 
@@ -80,6 +80,7 @@ function Navbar(props) {
 
 Navbar = withRouter(Navbar)
 export default connect(function(state,props){
+  console.log(".............. state" , state)
   return {
     isUserLoggedIn : state["AuthReducer"]["isUserLoggedIn"],
     name:state["AuthReducer"]["user"] && state["AuthReducer"]["user"]["name"]

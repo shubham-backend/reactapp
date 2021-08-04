@@ -9,40 +9,49 @@ class CakeList extends Component{
 	constructor(props){
 		super(props)
 		this.state = { isCakeloaded : false, cakes : []}
-		
-		setTimeout(()=>{
-			let apiurl = "https://apifromashu.herokuapp.com/api/allcakes"
-			axios({
-				url: apiurl,
-				method: 'get'
-			}).then((response)=>{
-				console.log("success", response.data.data);
-				this.setState({
-					cakes : response.data.data,
-					isCakeloaded: true
+		//console.log("Reducers props shubham", localStorage.cakes);
+		// this.setState({
+		// 	cakes : props.cakes['data']
+		// })
+		// if(localStorage.cakes != null){
+		// 	this.setState({
+		// 		cakes : localStorage.cakes,
+		// 		isCakeloaded: true
+		// 	})
+		// }else {
+			setTimeout(()=>{
+				let apiurl = "https://apifromashu.herokuapp.com/api/allcakes"
+				axios({
+					url: apiurl,
+					method: 'get'
+				}).then((response)=>{
+					localStorage.setItem('cakes',JSON.stringify(response.data.data))
+					this.props.dispatch({
+						type:"CAKELIST",
+						payload:response.data
+					})
+					this.setState({
+						cakes : response.data.data, //props.cakes['data'],
+						isCakeloaded: true
+					})
+				},(error)=>{
+					console.log("error", error);
 				})
-				localStorage.setItem('cakes',JSON.stringify(response.data.data))
-				this.props.dispatch({
-					type:"CAKELIST",
-					payload:response.data
-				})
-			},(error)=>{
-				console.log("error", error);
-			})
-			
-		},5000)
+				
+			},5000)
+		//}
 		
 		this.state.stl = {
 			display: "flex",
-			"margin-right": "0px",
-			"margin-left": "137px",
-			"margin-top": "0px",
+			"marginRight": "0px",
+			"marginLeft": "83px",
+			"marginTop": "0px",
 		}
 	}
 	
 	render(){
 		return 	(
-			<div style={{ textAlign: "center" }} >
+			<div style={{ textAlign: "center" }}>
 			{!this.state.isCakeloaded && 
 			// <loader> Loading appears here....</loader>
 			<Loader
@@ -56,8 +65,9 @@ class CakeList extends Component{
 
 			<div className="row" style={this.state.stl}>
 			{this.state.isCakeloaded && this.state.cakes.map((cake,index) =>(
+			
 				<div className="card" style={{width:"18em"}}>
-				  	<Link to={"/cake/"+cake.cakeid}><img className="card-img-top" src={cake.image} alt="Card image cap"/></Link>
+				  	<Link to={"/cake/"+cake.cakeid}><img className="card-img-top" ket={index} src={cake.image} alt="Card image cap"/></Link>
 				  <div className="card-body">
 					<h5 className="card-title">{cake.name}</h5>
 					<p className="card-text">{cake.price}</p>
@@ -74,9 +84,7 @@ class CakeList extends Component{
 
 CakeList = withRouter(CakeList)
 export default connect(function(state,props){
-	console.log(props);
-	console.log("props", state["CakeListReducer"]["cakes"]);
-  return {
-    cakes: state["CakeListReducer"]["cakes"] 
-  }
+	return {
+		cakes: state["CakeListReducer"]["cakes"] 
+	}
 })(CakeList)

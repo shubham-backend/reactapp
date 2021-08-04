@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios"
+import {Link, withRouter} from "react-router-dom"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Cakedetails(props){
 	var [cakedetails, setcakedetails] = useState({})
@@ -16,8 +19,46 @@ function Cakedetails(props){
 			console.log("error", error);
 		})
     },[])
-console.log(props.match.params);
-console.log(cakedetails);
+
+	let cakeObj = {
+		name : cakedetails.name,
+		cakeid : props.match.params.cakeid,
+		price : cakedetails.price,
+		weight : cakedetails.weight,
+		image: cakedetails.image
+	}
+	console.log(cakeObj);
+
+	function addcaketocart(){
+
+		toast.configure() 
+    	const notify = (message) => toast(message);
+		var msg ="";
+		let userLoginToken = localStorage.getItem("token")
+		if(userLoginToken == null)
+		{
+			props.history.push('/cake'+props.match.params.cakeid)
+		}
+        
+		let apiUrl = process.env.REACT_APP_BASE_API_URL+"/addcaketocart"
+		
+		axios({
+			url: apiUrl,
+			method: 'post',
+			data: cakeObj,
+			headers: {
+				authtoken: userLoginToken,
+			}
+		}).then((response)=>{
+			msg="Cake added in cart successfully."
+			notify(msg)
+			console.log(response.data);
+			console.log("Add to Cart success", response.data);
+		},(error)=>{
+			notify(error)
+			console.log("error", error);
+		})
+	}
     return(
         <div>
             {/* Cake details page {props.match.params.cakeid} */}
@@ -55,14 +96,8 @@ console.log(cakedetails);
 							<span className="size" data-toggle="tooltip" title="large">L</span>
 							<span className="size" data-toggle="tooltip" title="xtra large">XL</span>
 						</h5>
-						{/* <h5 className="colors">colors:
-							<span className="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
-							<span className="color green"></span>
-							<span className="color chocolate"></span>
-						</h5> */}
 						<div className="action">
-							<button className="add-to-cart btn btn-default" type="button">add to cart</button>
-							<button className="like btn btn-default" type="button"><span className="fa fa-heart"></span></button>
+							<button className="add-to-cart btn btn-default" type="button" onClick={addcaketocart}>add to cart</button>
 						</div>
 					</div>
 				</div>

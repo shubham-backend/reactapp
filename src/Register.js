@@ -47,7 +47,7 @@ export default function Register()
     return (
         <div style={{
             backgroundImage: 'url("cake-background.jpg")',
-            height: "300px",     "background-size": "cover", backgroundRepeat: "no-repeat"}}>
+            height: "300px",     "backgroundSize": "cover", backgroundRepeat: "no-repeat"}}>
             <div className="main">
                 <p className="sign" align="center">Sign Up</p>
                 <div className="form1">

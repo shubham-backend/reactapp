@@ -8,6 +8,13 @@ import axios from 'axios';
 import "./reduxstores/store"
 import {Provider} from "react-redux"
 import mystore from "./reduxstores/store"
+
+export var afterLogin = axios.create()
+afterLogin.interceptors.request.use((request)=>{
+  request.headers["authtoken"] = localStorage.token
+  return request
+})
+
 // axios.interceptors.request.use((request)=>{
 //   console.log("......" , request.url)
 //     if(request.url.includes("upload") || request.url.includes("cart") ){
@@ -19,6 +26,12 @@ import mystore from "./reduxstores/store"
 //   }, (error)=>{
 //   return Promise.reject(error)
 // }) 
+
+// axios.interceptors.response.use((response)=>{
+//   alert("response")
+
+//   return response
+// })
 
 ReactDOM.render(
     <Provider store={mystore}>

@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Component} from "react"
 import { connect } from "react-redux"
+import { Loginthunk } from "./reduxstores/thunks"
 
 function Login(props){
     toast.configure() 
@@ -17,34 +18,39 @@ function Login(props){
 var loginPost = function(){
     console.log("User has entered ", user);
     var apiUrl ="https://apifromashu.herokuapp.com/api/login";
-    axios({
-        url:apiUrl,
-        method:'post',
-        data:user
-    }).then((response) => {
-        console.log("Login Info", response)
-        if(response.data.token){
-            //props.loggedin(true)
-            props.dispatch({
-                type:"LOGIN",
-                payload:response.data
-            })
-            localStorage.token = response.data.token
-            //toast("Login Successfully!!");
-            msg="Success !! Login Successfully!!";
-            notify(msg)
-            props.history.push("/")
-        } else {
-            msg="Oops !! Invalid Credentials.!!";
-            <ToastContainer  />
-            notify(msg)
-            //alert("Invalid Credentials")
-        }
-    }, (error)=>{
-        <ToastContainer  />
-        notify("Oops !! Please enter Email or Password.")
-        console.log("Error - Login API", error)
-    })
+    // axios({
+    //     url:apiUrl,
+    //     method:'post',
+    //     data:user
+    // }).then((response) => {
+    //     console.log("Login Info", response)
+    //     if(response.data.token){
+    //         //props.loggedin(true)
+    //         props.dispatch({
+    //             type:"LOGIN",
+    //             payload:response.data
+    //         })
+    //         localStorage.token = response.data.token
+	// 		localStorage.setItem('token',response.data.token)
+
+    //         //toast("Login Successfully!!");
+    //         msg="Success !! Login Successfully!!";
+    //         notify(msg)
+    //         props.history.push("/")
+    //     } else {
+    //         msg="Oops !! Invalid Credentials.!!";
+    //         <ToastContainer  />
+    //         notify(msg)
+    //         //alert("Invalid Credentials")
+    //     }
+    // }, (error)=>{
+    //     <ToastContainer  />
+    //     notify("Oops !! Please enter Email or Password.")
+    //     console.log("Error - Login API", error)
+    // })
+
+    props.dispatch(Loginthunk(user))
+
 }
 
 useEffect(()=>{

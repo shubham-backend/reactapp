@@ -15,6 +15,8 @@ import ForgotPassword from "./ForgotPassword";
 import {BrowserRouter as Router, Route, Redirect, Switch, Link} from "react-router-dom"
 import { useState } from "react";
 import Loader from "react-loader-spinner";
+import Cart from "./Cart"
+import ErrorBoundary from "./ErrorBoundry";
 let trainee = ["Shubham", "Kumar", "Gupta"]
 
 
@@ -63,6 +65,7 @@ export default function App() {
         visible={spinnerLoading}
       /> */}
       {/* onClick={() => setSpinnerLoading(!spinnerLoading)} */}
+      <ErrorBoundary>
       <Router>
       {/* <Navbar fun= {function1}>Shubham Gupta</Navbar> */}
       <Navbar isUserLoggedIn={isUserLoggedIn} fun= {function1}>Shubham Gupta</Navbar>
@@ -76,12 +79,13 @@ export default function App() {
       <Route path = "/signup" exact component={Register } /> 
       <Route path = "/forgot-password" exact component={ForgotPassword } /> 
       <Route path = "/search" exact component={Search} /> 
+      <Route path = "/cart-details" exact component={Cart} /> 
       <Route path = "/add-cake" exact component={AddCake} /> 
       <Route path = "/cake/:cakeid" exact component={Cakedetails} /> 
       <Route path = "**"><Redirect to ="/"></Redirect></Route>
       </Switch>
       </Router>
-
+      </ErrorBoundary>
       {/* <Signup name="Shubham Gupta"></Signup>
       <Login />
       <Search /> */}

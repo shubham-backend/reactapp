@@ -13,7 +13,6 @@ function Search(props)
     let [loading,setLoading] = useState(true)
 
     useEffect(()=>{
-        console.log("Query Changed - " + query.q);
         let apiUrl = process.env.REACT_APP_BASE_API_URL+"/searchcakes?q="+query.q
         console.log(apiUrl);
        
@@ -21,7 +20,6 @@ function Search(props)
             url: apiUrl,
             method: 'get'
         }).then((response)=>{
-            console.log("success", response.data.data)
             setLoading(false);
             setCakes(response.data.data);
         },(error)=>{
@@ -29,7 +27,6 @@ function Search(props)
         })
     },[query.q])
 
-    console.log("Total Filtered Cakes - ",cakes);
     return (
         <div>
             {loading && 
@@ -55,7 +52,6 @@ function Search(props)
                 </div>
                 )
             }) }
-            {console.log(">>>>>>>>>>>>>",cakes.length)}
             <div className="alert alert-success nodatafound" role="alert">
                 <h4 className="alert-heading">Oops !!</h4>
                 <hr></hr>
