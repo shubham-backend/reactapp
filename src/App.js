@@ -1,3 +1,4 @@
+import "./App.css"
 import  Navbar  from "./Navbar";
 import {Carousel} from "./Carousel";
 import Cake from "./Cake";
@@ -65,10 +66,10 @@ export default function App() {
         visible={spinnerLoading}
       /> */}
       {/* onClick={() => setSpinnerLoading(!spinnerLoading)} */}
-      <ErrorBoundary>
+      {/* <ErrorBoundary> */}
       <Router>
       {/* <Navbar fun= {function1}>Shubham Gupta</Navbar> */}
-      <Navbar isUserLoggedIn={isUserLoggedIn} fun= {function1}>Shubham Gupta</Navbar>
+      <Navbar isUserLoggedIn={isUserLoggedIn} fun= {function1}>Shubham</Navbar>
 
       {/* <Search searchquery={searchtext}/> */}
       <Switch>
@@ -85,7 +86,7 @@ export default function App() {
       <Route path = "**"><Redirect to ="/"></Redirect></Route>
       </Switch>
       </Router>
-      </ErrorBoundary>
+      {/* </ErrorBoundary> */}
       {/* <Signup name="Shubham Gupta"></Signup>
       <Login />
       <Search /> */}

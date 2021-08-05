@@ -15,17 +15,18 @@ export default function Register()
         console.log("Registered Info", userInfo)
         if(userInfo.length == undefined) {
             notify('Please fill all the details.')
+        } else {
+            var apiUrl ="https://apifromashu.herokuapp.com/api/register";
+            axios({
+                url:apiUrl,
+                method:'post',
+                data:userInfo
+            }).then((response) => {
+                console.log("Register Info", response)
+            }, (error)=>{
+                console.log("Error - resgiter API", error)
+            })
         }
-        var apiUrl ="https://apifromashu.herokuapp.com/api/register";
-        axios({
-            url:apiUrl,
-            method:'post',
-            data:userInfo
-        }).then((response) => {
-            console.log("Register Info", response)
-        }, (error)=>{
-            console.log("Error - resgiter API", error)
-        })
     }
 
     var handleName = function(e){
@@ -46,7 +47,7 @@ export default function Register()
     let bgImage = "cake-background.jpg"
     return (
         <div style={{
-            backgroundImage: 'url("cake-background.jpg")',
+            //backgroundImage: 'url("cake-background.jpg")',
             height: "300px",     "backgroundSize": "cover", backgroundRepeat: "no-repeat"}}>
             <div className="main">
                 <p className="sign" align="center">Sign Up</p>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios"
-import {Link, withRouter} from "react-router-dom"
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Cakedetails(props){
@@ -38,26 +37,28 @@ function Cakedetails(props){
 		if(userLoginToken == null)
 		{
 			props.history.push('/cake'+props.match.params.cakeid)
-		}
+			notify("You need to login first.")
+		} else {
         
-		let apiUrl = process.env.REACT_APP_BASE_API_URL+"/addcaketocart"
-		
-		axios({
-			url: apiUrl,
-			method: 'post',
-			data: cakeObj,
-			headers: {
-				authtoken: userLoginToken,
-			}
-		}).then((response)=>{
-			msg="Cake added in cart successfully."
-			notify(msg)
-			console.log(response.data);
-			console.log("Add to Cart success", response.data);
-		},(error)=>{
-			notify(error)
-			console.log("error", error);
-		})
+			let apiUrl = process.env.REACT_APP_BASE_API_URL+"/addcaketocart"
+			
+			axios({
+				url: apiUrl,
+				method: 'post',
+				data: cakeObj,
+				headers: {
+					authtoken: userLoginToken,
+				}
+			}).then((response)=>{
+				msg="Cake added in cart successfully."
+				notify(msg)
+				console.log(response.data);
+				console.log("Add to Cart success", response.data);
+			},(error)=>{
+				notify(error)
+				console.log("error", error);
+			})
+		}
 	}
     return(
         <div>

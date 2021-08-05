@@ -16,51 +16,52 @@
 //     }
 // }
 
-// export var AuthReducer = function(state ={
-//     isUserLoggedIn : localStorage.token?true:false
-// }, action) {
-//     switch(action.type){
-//         case "LOGIN" : {
-//             state={...state}
-//             state["isUserLoggedIn"] = true
-//             state["user"] = action.payload
-//             return state
-//         }
-//         default : return state
-//     }
-// }
-
 export var AuthReducer = function(state ={
-    isUserLoggedIn : localStorage.token?true:false,
-    isloading:false
-},action){
-// state means here state of store i.e that object whihc contains data
-// action means what it has to do 
-   console.log("ooooooooooooooooo" , action)
-   switch(action.type){
-       case "LOGIN_FETCH":{
-           state= {...state}
-           state["isloading"] = true
-           return state
-       }
-       case "LOGIN_SUCESS" :{
-           state = {...state}
-           state["isUserLoggedIn"] = true
-           state["user"] = action.payload
-           localStorage.setItem('token',action.payload.token)
-           state["isloading"] = false
-           console.log(">>>>>>>>>>>>>>>>>>>>" , state)
-           return state
-       }
-       case "LOGIN_FAILURE":{
-        state= {...state}
-        state["isloading"] = false
-        state["error"]="INVALID LOGIN"
-        return state
+    isUserLoggedIn : localStorage.token?true:false
+}, action) {
+    switch(action.type){
+        case "LOGIN" : {
+            state={...state}
+            state["isUserLoggedIn"] = true
+            state["user"] = action.payload
+            return state
+        }
+        default : return state
     }
-       default : return state
-   }
 }
+
+// Thunk
+// export var AuthReducer = function(state ={
+//     isUserLoggedIn : localStorage.token?true:false,
+//     isloading:false
+// },action){
+// // state means here state of store i.e that object whihc contains data
+// // action means what it has to do 
+//    console.log("ooooooooooooooooo" , action)
+//    switch(action.type){
+//        case "LOGIN_FETCH":{
+//            state= {...state}
+//            state["isloading"] = true
+//            return state
+//        }
+//        case "LOGIN_SUCESS" :{
+//            state = {...state}
+//            state["isUserLoggedIn"] = true
+//            state["user"] = action.payload
+//            localStorage.setItem('token',action.payload.token)
+//            state["isloading"] = false
+//            console.log(">>>>>>>>>>>>>>>>>>>>" , state)
+//            return state
+//        }
+//        case "LOGIN_FAILURE":{
+//         state= {...state}
+//         state["isloading"] = false
+//         state["error"]="INVALID LOGIN"
+//         return state
+//     }
+//        default : return state
+//    }
+// }
 
 
 export var CakeListReducer = function(state ={

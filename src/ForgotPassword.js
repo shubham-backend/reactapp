@@ -14,27 +14,31 @@ function ForgotPassword(props){
     let msg = "";
     
     var forgotPost = function(){
-    var apiUrl =process.env.REACT_APP_BASE_API_URL+"/recoverpassword";
-    axios({
-        url:apiUrl,
-        method:'post',
-        data:user
-    }).then((response) => {
-        console.log("Forgot Password Info", response)
-        if(response.data){
-            if(response.data.errorMessage){
-                msg="Please Enter your registered email."
-                notify(msg)
-            } else if(response.data.message) {
-                notify(response.data.message)
-            } 
+        if(user.length == undefined) {
+            notify('Please enter your registered email.')
         } else {
-            msg = "Invalid Credentials";
-            notify(msg)
+            var apiUrl =process.env.REACT_APP_BASE_API_URL+"/recoverpassword";
+            axios({
+                url:apiUrl,
+                method:'post',
+                data:user
+            }).then((response) => {
+                console.log("Forgot Password Info", response)
+                if(response.data){
+                    if(response.data.errorMessage){
+                        msg="Please Enter your registered email."
+                        notify(msg)
+                    } else if(response.data.message) {
+                        notify(response.data.message)
+                    } 
+                } else {
+                    msg = "Invalid Credentials";
+                    notify(msg)
+                }
+            }, (error)=>{
+                console.log("Error - Forgot Password API", error)
+            })
         }
-    }, (error)=>{
-        console.log("Error - Forgot Password API", error)
-    })
 }
 
 useEffect(()=>{

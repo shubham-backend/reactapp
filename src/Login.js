@@ -14,55 +14,63 @@ function Login(props){
     let user ={}
     var [errorMessage, setErrorMessage] = useState()
     let msg="";
+    
+    useEffect(()=>{
+        //Code
+    },[errorMessage])
+    
+    
+    var handleEmail = function(e){
+        user.email = e.target.value
+        console.log(user.email);
+    }
+    var handlePassword = function(e){
+        user.password = e.target.value
+        console.log(user.password);
+    }
+    
+    console.log("user -", user);
 
 var loginPost = function(){
-    console.log("User has entered ", user);
-    var apiUrl ="https://apifromashu.herokuapp.com/api/login";
-    // axios({
-    //     url:apiUrl,
-    //     method:'post',
-    //     data:user
-    // }).then((response) => {
-    //     console.log("Login Info", response)
-    //     if(response.data.token){
-    //         //props.loggedin(true)
-    //         props.dispatch({
-    //             type:"LOGIN",
-    //             payload:response.data
-    //         })
-    //         localStorage.token = response.data.token
-	// 		localStorage.setItem('token',response.data.token)
+    console.log(user);
+    if(user.lenget == 'undefined') {
+        notify('Please enter email or password.')
+    }else {
+        console.log("User has entered ", user);
+        var apiUrl ="https://apifromashu.herokuapp.com/api/login";
+        axios({
+            url:apiUrl,
+            method:'post',
+            data:user
+        }).then((response) => {
+            console.log("Login Info", response)
+            if(response.data.token){
+                //props.loggedin(true)
+                props.dispatch({
+                    type:"LOGIN",
+                    payload:response.data
+                })
+                localStorage.token = response.data.token
+                localStorage.setItem('token',response.data.token)
 
-    //         //toast("Login Successfully!!");
-    //         msg="Success !! Login Successfully!!";
-    //         notify(msg)
-    //         props.history.push("/")
-    //     } else {
-    //         msg="Oops !! Invalid Credentials.!!";
-    //         <ToastContainer  />
-    //         notify(msg)
-    //         //alert("Invalid Credentials")
-    //     }
-    // }, (error)=>{
-    //     <ToastContainer  />
-    //     notify("Oops !! Please enter Email or Password.")
-    //     console.log("Error - Login API", error)
-    // })
+                //toast("Login Successfully!!");
+                msg="Success !! Login Successfully!!";
+                notify(msg)
+                props.history.push("/")
+            } else {
+                msg="Oops !! Invalid Credentials.!!";
+                <ToastContainer  />
+                notify(msg)
+                //alert("Invalid Credentials")
+            }
+        }, (error)=>{
+            <ToastContainer  />
+            notify("Oops !! Please enter Email or Password.")
+            console.log("Error - Login API", error)
+        })
+    }
+    //props.dispatch(Loginthunk(user))
 
-    props.dispatch(Loginthunk(user))
-
-}
-
-useEffect(()=>{
-    //Code
-},[errorMessage])
-
-
-var handleEmail = function(e){
-    user.email = e.target.value
-}
-var handlePassword = function(e){
-    user.password = e.target.value
 }
 
 return (
