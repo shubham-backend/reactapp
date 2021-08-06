@@ -65,7 +65,7 @@ export var AuthReducer = function(state ={
 
 
 export var CakeListReducer = function(state ={
-    cakes : localStorage.cakes?true:false
+    cakes:localStorage.cakes ? JSON.parse(localStorage.cakes) : []
 }, action) {
     switch(action.type){
         case "CAKELIST" : {

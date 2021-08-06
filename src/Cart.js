@@ -8,25 +8,31 @@ import Loader from "react-loader-spinner";
 function Cart(props){
 
     let [CakeCart, setCakeCart] = useState([])
+    var[loader,setloader]=useState(true)
+
     useEffect(()=>{
         if(props.isUserLoggedIn){
             props.dispatch({
                 type:"Cart_Items"
-            })
+            })						
+            setloader(false)
+
         }
         else{
             toast.error("You need to login first")
         }
         setCakeCart(props.CakeCart)
-    },[CakeCart])
+    },[removeCakeFromCart])
 
     //Remove One Whole Cake Row Deleted
+    
     function removeCakeFromCart(cake) {
         props.dispatch({
             type:"removeItemFromCart",
             payload:{'cakeid': cake.cakeid}
         })
         setCakeCart(props.CakeCart)
+        setloader(false)
         toast.error("Cake Deleted successfuly from your cart.")
     }
 
@@ -55,7 +61,7 @@ function Cart(props){
 
     return (
         <div>
-            {!props.CakeCart && 
+           {!props.CakeCart && 
 			<Loader
 				type="Circles"
 				color="#00BFFF"
@@ -64,7 +70,8 @@ function Cart(props){
 				timeout={3000}
 			/>
 			}
-                   <div className="px-4 px-lg-0">
+            { props.CakeCart &&
+            <div className="px-4 px-lg-0">
                 {/* <!-- For demo purpose --> */}
                 <div className="container text-white py-5 text-center">
                     <h1 className="display-4">My Cart</h1>
@@ -125,15 +132,17 @@ function Cart(props){
                                         <button onClick={(e)=>{removeCakeFromCart(cake)}}><a href="#" className="text-dark">Delete<i className="fa fa-trash"></i></a></button>
                                     </td>
                                 </tr>
-		                    ))}
-
+		                    )) }
                             </tbody>
                             </table>
                         </div>
+                        { props.CakeCart.length == 0 && 
+                            <div class="alert alert-danger" role="alert" style={{"width": "1083px"}}>
+                            No Cake Found.!
+                          </div>} 
                         {/* <!-- End --> */}
                         </div>
                     </div>
-
                     <div className="row py-5 p-4 bg-white rounded shadow-sm">
                         <div className="col-lg-12">
                         <div className="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
@@ -150,11 +159,11 @@ function Cart(props){
                         </div>
                         </div>
                     </div>
-
+                    }
                     </div>
                 </div>
             </div>
-                
+            }  
         </div>
     )
 }
