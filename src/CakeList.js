@@ -24,7 +24,7 @@ function CakeList(props) {
 	}
 		
 		useEffect(() => {
-			if (props.cakes == undefined){
+			if (props.cakes.length == 0){
 				setTimeout(()=>{
 					let apiurl = "https://apifromashu.herokuapp.com/api/allcakes"
 					axios({
@@ -36,7 +36,7 @@ function CakeList(props) {
 							type:"CAKELIST",
 							payload:response.data.data
 						})
-						setcakes(props.cakes)
+						setcakes(response.data.data)
 						setloader(false)
 					},(error)=>{
 						console.log("error", error);
@@ -48,7 +48,7 @@ function CakeList(props) {
        			setloader(false)
 			}
 		}, []); 
-	console.log(cakes);
+	console.log(">>>>>>>>>>>>>>>>..",cakes);
 
 		return 	(
 			<div style={{ textAlign: "center" }}>

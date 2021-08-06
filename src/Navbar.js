@@ -53,8 +53,8 @@ function Navbar(props) {
         </div>
       </ul>
       <div className="form-inline my-2 my-lg-0">
-          {console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",props.location.pathname)}
-      {props.location.pathname == '/' || props.location.pathname == '/search' &&
+          {console.log(">>>>>>>>>>>>>>>>>>>>skg>>>>>>>>>>>>>>>>>>>>>>>",props.location.pathname)}
+      {(props.location.pathname == '/' || props.location.pathname == '/search') &&
         <div>
           <input onChange={handleSearchtext} className="form-control mr-sm-2" type="search" placeholder="Search your favourite cake..." aria-label="Search"></input>
           <button onClick={search} className="btn btn-success search" type="submit">Search</button>
