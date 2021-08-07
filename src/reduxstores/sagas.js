@@ -1,4 +1,4 @@
-import {all , takeEvery , put} from "redux-saga/effects"
+import {all , takeEvery , put, call} from "redux-saga/effects"
 import axios from "axios"
 import {afterLogin} from "../index"
 function *CartGenerator(){
@@ -12,7 +12,7 @@ var success = true
    url: "https://apifromashu.herokuapp.com/api/cakecart",
    requesObj: {}
   })
-  console.log("data  from cart items " , response.data.data)
+  console.log("data  from cart items shubham " , response.data.data)
   if(response.data){
       yield put({
           type:"CART_SUCCESS",
@@ -30,20 +30,23 @@ function *CartSaga(){
 }
 
 function *CartManageGenerator({payload}){
+
   yield put({
-    type:"CART_MANAGE_FETCHING"
+    type:"CART_MANAGE_FETCHING",
+    
   })
 
   var response  = yield afterLogin({method:"post",
    url: "https://apifromashu.herokuapp.com/api/removeonecakefromcart",
-   payload
+   data:payload
   })
-  console.log("Data from cart manage items " , response.data.data)
-  if(response.data.data){
+  console.log("Data from cart manage items shubham -" , response)
+  if(response){
       yield put({
           type:"CART_MANAGE_SUCCESS",
-          payload:response.data.data
+          data:response.data
       })
+      //yield call(CartSaga);
   }else{
     yield put({
         type:"CART_MANAGE_FAILURE"
@@ -52,13 +55,13 @@ function *CartManageGenerator({payload}){
 }
 
 function *CartManageSaga(){
-  yield takeEvery('Cart_Inc_Desc_Items' , CartManageGenerator)
+  yield takeEvery('Remove_One_Cake_Items' , CartManageGenerator)
 }
 
-function *DeleteCartGenerator({ payload }){
+function *DeleteCartGenerator({payload}){
   yield put({
       type:"DELETE_CART_FETCHING",
-      payload
+      data:payload
   })
 
   var response  = yield afterLogin({method:"post",
@@ -76,8 +79,8 @@ function *DeleteCartGenerator({ payload }){
         type:"DELETE_CART_FAILURE"
     })
   }
+  window.location.reload()
 }
-
 
 function *DeleteCartSaga(){
   yield takeEvery( 'removeItemFromCart' , DeleteCartGenerator)
@@ -85,6 +88,6 @@ function *DeleteCartSaga(){
 
 
 export default function *RootSaga(){
-    console.log("root sga ")
+    //console.log("root sga ")
  yield all([CartSaga(),CartManageSaga(),DeleteCartSaga()])
 }

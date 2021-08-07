@@ -48,7 +48,6 @@ function CakeList(props) {
        			setloader(false)
 			}
 		}, []); 
-	console.log(">>>>>>>>>>>>>>>>..",cakes);
 
 		return 	(
 			<div style={{ textAlign: "center" }}>
@@ -64,8 +63,8 @@ function CakeList(props) {
 			<div className="row" style={stl}>
 			{cakes.map((cake,index) =>(
 				
-				<div className="card hvimg" style={cakestl}>
-				  	<Link to={"/cake/"+cake.cakeid}><img className="card-img-top hvimg1"  key={index} src={(cake.image !== 'blob:http://localhost:3000/fd6aa672-e0e2-44de-a831-facfed923aae') ? cake.image : 'https://res.cloudinary.com/ashudev/image/upload/v1624003710/s3ddfink2vj0tys1os0q.jpg'} alt="Card image cap"/></Link>
+				<div className="card hvimg" style={cakestl} key={index}>
+				  	<Link to={"/cake/"+cake.cakeid}><img className="card-img-top hvimg1" src={(cake.image !== 'blob:http://localhost:3000/fd6aa672-e0e2-44de-a831-facfed923aae') ? cake.image : 'https://res.cloudinary.com/ashudev/image/upload/v1624003710/s3ddfink2vj0tys1os0q.jpg'} alt="Card image cap"/></Link>
 				  <div className="card-body">
 					<h5 className="card-title">{cake.name}</h5>
 					<p className="card-text">₹{cake.price}</p>

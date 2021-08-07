@@ -1,15 +1,15 @@
 import CakeList from "./CakeList";
 import { Carousel } from "./Carousel";
 import  HomeNavbar  from "./HomeNavbar";
-
+import {Footer} from './Footer'
 function Home(props)
 {
-    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.",props);
     return (
         <div>
             {/* <HomeNavbar> Hi Shubham Gupta</HomeNavbar> */}
             <Carousel />
             <CakeList />
+            <Footer />
         </div>
     )
 }

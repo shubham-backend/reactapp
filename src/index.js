@@ -9,6 +9,8 @@ import "./reduxstores/store"
 import {Provider} from "react-redux"
 import mystore from "./reduxstores/store"
 
+export var requestFunction = axios.create()
+
 export var afterLogin = axios.create()
 afterLogin.interceptors.request.use((request)=>{
   request.headers["authtoken"] = localStorage.token

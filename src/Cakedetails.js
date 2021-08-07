@@ -106,7 +106,6 @@ function Cakedetails(props){
 		</div>
 	</div>
     </div>
-
     )
 }
 
