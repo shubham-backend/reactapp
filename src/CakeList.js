@@ -14,7 +14,8 @@ function CakeList(props) {
 		"justifyContent": "center",
 		"flexFlow": "wrap row",
 		"alignItems": "flex-start",
-		"marginTop": "40px"
+		"marginTop": "40px",
+		"marginBottom": "50px"
 	}
 
 	let cakestl = {
@@ -60,7 +61,7 @@ function CakeList(props) {
 				timeout={3000} //3 secs
 			/>
 			}
-			<div className="row" style={stl}>
+			<div className="row" style={stl} className="cakelist">
 			{cakes.map((cake,index) =>(
 				
 				<div className="card hvimg" style={cakestl} key={index}>

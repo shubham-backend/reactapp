@@ -70,7 +70,7 @@ function Cakedetails(props){
 					<div className="preview col-md-6">
 						
 						<div className="preview-pic tab-content">
-						<div className="tab-pane active" id="pic-1"><img src={cakedetails.image} /></div>
+						<div className="tab-pane active" id="pic-1"><img class="img-cake" src={cakedetails.image} /></div>
 						</div>
 					</div>
 					<div className="details col-md-6">
@@ -78,25 +78,21 @@ function Cakedetails(props){
 						<div className="rating">
 							<div className="stars">
 								<h5>Rating : </h5>
-								{cakedetails.ratings} 
+								{cakedetails.ratings}* / <span className="review-no">{cakedetails.reviews} Reviews</span>
 								<span className="fa fa-star checked"></span>
 								<span className="fa fa-star checked"></span>
 								<span className="fa fa-star checked"></span>
 								<span className="fa fa-star"></span>
 								<span className="fa fa-star"></span>
 							</div>
-							<span className="review-no">{cakedetails.reviews} Reviews</span>
 						</div>
-						<p className="product-description">{cakedetails.description}</p>
-						<h3 className="price">Current price: <span>₹ {cakedetails.price}</span></h3>
-						<h3 className="price">Weight: <span>{cakedetails.weight} Kg</span></h3>
-						<h3 className="price">Flavour: <span>{cakedetails.flavour}</span></h3>
-						<h5 className="sizes">sizes:
+						<p className="product-description" style={{float:"left"}}>{cakedetails.description} <h4 className="price">Current price: <span>₹ {cakedetails.price}</span><h4 className="price">Weight: <span>{cakedetails.weight} Kg</span></h4><h4 className="price">Flavour: <span>{cakedetails.flavour}</span></h4></h4></p>
+						{/* <h5 className="sizes">sizes:
 							<span className="size" data-toggle="tooltip" title="small">S</span>
 							<span className="size" data-toggle="tooltip" title="medium">M</span>
 							<span className="size" data-toggle="tooltip" title="large">L</span>
 							<span className="size" data-toggle="tooltip" title="xtra large">XL</span>
-						</h5>
+						</h5> */}
 						<div className="action">
 							<button className="add-to-cart btn btn-default" type="button" onClick={addcaketocart}>add to cart</button>
 						</div>

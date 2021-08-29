@@ -401,7 +401,7 @@ svg.V3C5bO {
   margin-right: 10px;
 }
 
-div#carouselExampleControls {
+div#carouselExampleIndicators {
   padding: 0 10px;
 }
 
@@ -428,4 +428,19 @@ div#carouselExampleControls {
   height: 230px;
   display: block;
   overflow: hidden;
+}
+
+.card {
+  border-radius: 1.25rem; 
+}
+
+.container {
+  width: 1024px;
+  margin-top: 1px;
+}
+
+
+img.img-cake {
+    width: 100%;
+    height: 320px;
 }
