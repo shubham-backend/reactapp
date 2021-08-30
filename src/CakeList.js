@@ -62,7 +62,7 @@ function CakeList(props) {
 			/>
 			}
 			<div className="row" style={stl} className="cakelist">
-			{cakes.map((cake,index) =>(
+			{cakes?.map((cake,index) =>(
 				
 				<div className="card hvimg" style={cakestl} key={index}>
 				  	<Link to={"/cake/"+cake.cakeid}><img className="card-img-top hvimg1" src={(cake.image !== 'blob:http://localhost:3000/fd6aa672-e0e2-44de-a831-facfed923aae') ? cake.image : 'https://res.cloudinary.com/ashudev/image/upload/v1624003710/s3ddfink2vj0tys1os0q.jpg'} alt="Card image cap"/></Link>

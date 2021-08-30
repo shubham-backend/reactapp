@@ -1,7 +1,7 @@
 import React from 'react'
 export const Footer = () => {
     let footerstyle = {
-        position : "fixed",
+        //position : "fixed",
         left: 0,
         bottom: 0,
         width : "100%",

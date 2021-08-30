@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import axios from "axios"
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loader from "react-loader-spinner";
 
 function Cakedetails(props){
 	var [cakedetails, setcakedetails] = useState({})
+    var [loader,setloader] = useState(true)
+
     useEffect(() => {
         let apiUrl = "https://apifromashu.herokuapp.com/api/cake/"+props.match.params.cakeid
         console.log("Api",apiUrl);
@@ -14,6 +17,7 @@ function Cakedetails(props){
 		}).then((response)=>{
 			console.log("success", response.data.data);
 			setcakedetails(response.data.data)
+			setloader(false)
 		},(error)=>{
 			console.log("error", error);
 		})
@@ -62,7 +66,15 @@ function Cakedetails(props){
 	}
     return(
         <div>
-            {/* Cake details page {props.match.params.cakeid} */}
+			{loader ? 
+			<Loader
+				type="Circles"
+				color="#00BFFF"
+				height={100}
+				width={100}
+				timeout={3000} //3 secs
+			/>
+			:
         <div className="container">
 		    <div className="card">
 			<div className="container-fliud">
@@ -100,7 +112,7 @@ function Cakedetails(props){
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>}
     </div>
     )
 }
