@@ -11,31 +11,44 @@ function Login(props){
     toast.configure() 
     const notify = (message) => toast(message);
 
-    let user ={}
+    //let user ={}
     var [errorMessage, setErrorMessage] = useState()
+    var [user, setUser] = useState({})
+    var[errorEmail,setErrorEmail] = useState(null)
+    var[errorPassword,setErrorPassword] = useState(null)
     let msg="";
     
     useEffect(()=>{
         //Code
     },[errorMessage])
     
-    
     var handleEmail = function(e){
         user.email = e.target.value
-        console.log(user.email);
+        setUser(user)
     }
     var handlePassword = function(e){
         user.password = e.target.value
-        console.log(user.password);
+        setUser(user)
     }
     
     console.log("user -", user);
 
-var loginPost = function(){
+var loginPost = function(e){
     console.log(user);
-    if(user.lenget == 'undefined') {
+    if(!user.email || !user.password) {
+        e.preventDefault();
+            setErrorEmail('');
+            setErrorPassword('');
+            if(!user.email){
+                setErrorEmail("Email field is required.");
+            } 
+            if(!user.password){
+                setErrorPassword("Password field is required.");
+            }
         notify('Please enter email or password.')
-    }else {
+    }
+    if(user.email && user.password)
+    {
         console.log("User has entered ", user);
         var apiUrl ="https://apifromashu.herokuapp.com/api/login";
         axios({
@@ -77,14 +90,20 @@ return (
         <div>
             <div className="main">
                 <p className="sign" align="center">Sign in</p>
-                <div className="form1">
+                <div className="form-group">
                     <input className="un" onChange={handleEmail}  type="text" align="center" placeholder="Enter Email" />
+                    <div className="text-danger" style={{margin:"-11px"}}>{errorEmail}</div>
+                </div>
+                <div className="form-group">
                     <input className="pass" onChange={handlePassword} type="password" align="center" placeholder="Enter Password" />
-                    <button className="submit" align="center" onClick={loginPost} id="login">Sign in</button>
+                    <div className="text-danger" style={{margin:"-15px"}}>{errorPassword}</div>
+                </div>
+                <div className="form-group">
+                    <button className="submit" align="center" style={{marginTop:"10px"}} onClick={loginPost} id="login">Sign in</button>
                     <p className="forgot" align="center"><Link to="/forgot-password">Forgot Password?</Link></p>
                     <p className="forgot" align="center"><Link to="/signup">Not a member? Signup now</Link></p>   
-                </div>   
-            </div>
+                </div>
+            </div>   
         </div>
     )
 }

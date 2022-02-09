@@ -9,7 +9,6 @@ function Home(props)
             {/* <HomeNavbar> Hi Shubham Gupta</HomeNavbar> */}
             <Carousel />
             <CakeList />
-            <Footer />
         </div>
     )
 }

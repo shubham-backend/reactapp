@@ -130,7 +130,7 @@ function Cart(props){
                             </table>
                         </div>
                             {props.CakeCartItem.length === 0 && 
-                            <div className="alert alert-danger" role="alert" style={{"width": "1083px"}}>
+                            <div className="alert alert-danger" role="alert" style={{"width": "100%"}}>
                              No Cake Found.!
                             </div>} 
                         </div>

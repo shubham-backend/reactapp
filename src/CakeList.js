@@ -1,10 +1,9 @@
-import {Component} from "react"
+import React, {useEffect, useState} from "react"
 import {Link, withRouter} from "react-router-dom"
 import axios from "axios"
 import { connect } from "react-redux"
-import React from 'react';
 import Loader from "react-loader-spinner";
-import { useEffect, useState } from "react"
+import {Footer} from "./Footer"
 
 function CakeList(props) {
 	var [cakes ,setcakes] = useState([])
@@ -26,24 +25,22 @@ function CakeList(props) {
 		
 		useEffect(() => {
 			if (props.cakes.length == 0){
-				setTimeout(()=>{
-					let apiurl = "https://apifromashu.herokuapp.com/api/allcakes"
-					axios({
-						url: apiurl,
-						method: 'get'
-					}).then((response)=>{
-						localStorage.setItem('cakes',JSON.stringify(response.data.data))
-						props.dispatch({
-							type:"CAKELIST",
-							payload:response.data.data
-						})
-						setcakes(response.data.data)
-						setloader(false)
-					},(error)=>{
-						console.log("error", error);
+				let apiurl = "https://apifromashu.herokuapp.com/api/allcakes"
+				axios({
+					url: apiurl,
+					method: 'get'
+				}).then((response)=>{
+					localStorage.setItem('cakes',JSON.stringify(response.data.data))
+					props.dispatch({
+						type:"CAKELIST",
+						payload:response.data.data
 					})
+					setcakes(response.data.data)
+					setloader(false)
+				},(error)=>{
+					console.log("error", error);
+				})
 					
-				},5000) 
 			} else {
 				setcakes(props.cakes)
        			setloader(false)
@@ -74,6 +71,7 @@ function CakeList(props) {
 				  </div>
 				</div>
 			))}
+			{loader ? '' : <Footer />}
 			</div>
 			</div>
 		)
